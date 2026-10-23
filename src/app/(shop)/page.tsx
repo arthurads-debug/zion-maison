@@ -8,7 +8,7 @@ import {
   getSettings,
 } from "@/server/catalog";
 import { ProductCard } from "@/components/shop/product-card";
-import { EditorialVideo } from "@/components/shop/editorial-video";
+import { ReelsSection } from "@/components/shop/reels-section";
 import { ArrowRight, ArrowUpRight } from "@/components/shop/icons";
 import { text, safeLink, imageUrl } from "@/lib/content";
 export default async function Home() {
@@ -225,31 +225,21 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      {videos.length > 0 && (
-        <section data-home-block="videos" className="section">
-          <div className="section-top">
-            <div>
-              <p className="eyebrow">Textura. Movimento. Presença.</p>
-              <h2>Zion in Motion</h2>
-            </div>
-            <span className="muted">Descubra os detalhes em movimento.</span>
-          </div>
-          <div className="motion-grid">
-            {videos.map(
-              (v) =>
-                imageUrl(text(v.body, "video_url")) && (
-                  <EditorialVideo
-                    key={v.id}
-                    src={imageUrl(text(v.body, "video_url"))}
-                    poster={imageUrl(text(v.body, "poster_url"))}
-                    title={v.title}
-                    href={safeLink(text(v.body, "cta_href"))}
-                  />
-                ),
-            )}
-          </div>
-        </section>
-      )}
+      <ReelsSection
+        data-home-block="videos"
+        items={videos
+          .filter((v) => imageUrl(text(v.body, "video_url")))
+          .map((v) => ({
+            id: v.id,
+            src: imageUrl(text(v.body, "video_url")),
+            poster: imageUrl(text(v.body, "poster_url")),
+            title: v.title,
+            href: text(v.body, "cta_href")
+              ? safeLink(text(v.body, "cta_href"))
+              : undefined,
+            ctaLabel: text(v.body, "cta_label", "Ver detalhes ↗"),
+          }))}
+      />
       {looks.length > 0 && (
         <section data-home-block="looks" className="section">
           <div className="section-top">

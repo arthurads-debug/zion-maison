@@ -22,6 +22,8 @@ Use a biblioteca para enviar imagens JPEG/PNG/WebP até 20 MB; o servidor inspec
 
 Vídeos MP4 H.264 ou WebM compatível têm limite de 100 MB, cinco minutos e 3840 pixels por dimensão (até 8,29 megapixels). O servidor mede fluxo, dimensões e duração; não realiza transcodificação. Envie vídeo já otimizado e selecione imagem de capa. Teste reprodução nos aparelhos do público antes de publicar.
 
+A área “Zion in Motion” da homepage usa Reels em proporção 9:16. Exporte preferencialmente em 1080 × 1920 px, selecione o vídeo e sua capa no painel e publique. Cada vídeo toca em looping, sem som, quando ao menos metade está visível. Há pausa individual, setas e deslize horizontal; vídeos pausam fora da tela ou ao ocultar a aba. Movimento reduzido desativa o início automático. Nenhum iframe do Instagram é necessário: use arquivos da própria marca.
+
 No CMS, edite banner, imagens desktop/celular, textos, seções, páginas institucionais, Instagram editorial, looks e vídeos. Publicação e ordem pertencem ao conteúdo. A ordem dos blocos principais da homepage é alterada em Configurações; a ordem dos editoriais internos fica no CMS. Novidades usam data de criação; mais procuradas usam pontuação de eventos consentidos. Sem eventos, a ordenação tem desempate estável; não exibe contagens inventadas.
 
 O Instagram é curadoria de imagens e links cadastrados, sem integração automática com uma conta. Looks relacionam produtos reais. Fotos de produtos e o logotipo original ainda precisam ser fornecidos pela loja; a referência visual anexada não foi tratada como catálogo vendável.

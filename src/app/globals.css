@@ -635,7 +635,7 @@ button.icon-button {
 }
 .motion-card {
   position: relative;
-  aspect-ratio: 9/14;
+  aspect-ratio: 9/16;
   background: var(--champagne);
   overflow: hidden;
 }
@@ -1902,5 +1902,155 @@ label > textarea {
   select,
   textarea {
     font-size: 16px;
+  }
+}
+
+/* A 1080 × 1920 Reel keeps its 9:16 shape at every rendered size. */
+.reels-section {
+  overflow: hidden;
+}
+.reels-heading {
+  align-items: end;
+}
+.reels-description {
+  margin-top: 14px;
+  color: #756659;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.reels-navigation {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.reels-navigation .icon-button {
+  border: 1px solid #d9cbbc;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+.reels-navigation .icon-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.reels-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 4);
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #bba18a transparent;
+  padding-bottom: 14px;
+}
+.reels-track .motion-card {
+  min-width: 0;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  border-radius: 3px;
+}
+.reels-track .video-caption {
+  padding: 60px 20px 24px;
+}
+.reels-track .video-caption p {
+  font-size: clamp(23px, 2vw, 31px);
+  line-height: 1.15;
+}
+.reels-track .video-toggle {
+  width: 44px;
+  height: 44px;
+  z-index: 1;
+}
+.reels-hint {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #756659;
+}
+.reels-empty {
+  min-height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 40px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #ede3d6, #dfccb4);
+  color: var(--coffee);
+}
+.reels-empty > div {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+}
+.reels-empty > div > p:last-child {
+  margin-top: 14px;
+  font: clamp(26px, 3vw, 39px)/1.2 var(--serif);
+}
+.reels-emblem {
+  display: grid;
+  place-items: center;
+  border: 1px solid #b99c80;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+}
+.reels-signature {
+  position: absolute;
+  right: 4%;
+  top: -60px;
+  font: italic 350px/0.95 var(--serif);
+  opacity: 0.12;
+}
+.video-unavailable {
+  position: absolute;
+  inset: 35% 16px auto;
+  text-align: center;
+  padding: 18px;
+  font-size: 12px;
+  background: #f8f5efeb;
+  color: var(--coffee);
+}
+@media (max-width: 1050px) {
+  .reels-track {
+    grid-auto-columns: calc((100% - 32px) / 3);
+  }
+}
+@media (max-width: 700px) {
+  .reels-heading {
+    gap: 16px;
+  }
+  .reels-heading h2 {
+    font-size: 38px;
+  }
+  .reels-description {
+    max-width: 250px;
+    font-size: 12px;
+  }
+  .reels-track {
+    grid-auto-columns: 78%;
+    gap: 12px;
+  }
+  .reels-navigation {
+    gap: 5px;
+  }
+  .reels-navigation .icon-button {
+    width: 40px;
+    height: 40px;
+  }
+  .reels-empty {
+    padding: 28px 22px;
+    gap: 18px;
+    min-height: 230px;
+  }
+  .reels-emblem {
+    width: 48px;
+    height: 48px;
   }
 }

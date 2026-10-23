@@ -48,3 +48,12 @@ A infraestrutura de mídia preserva originais e referências; uploads abandonado
 Sem logo original, fotos individuais, catálogo, WhatsApp e políticas finais da operação, foram usados marca tipográfica provisória, arte abstrata em CSS e estados vazios. A imagem de referência não virou mercadoria fictícia. O projeto não foi publicado nem conectado a contas externas.
 
 Próximas ações dependentes da operação estão em `docs/operations/acceptance.md`; o passo a passo de criação do Supabase está em `docs/operations/setup.md`.
+
+
+## Atualização — Reels na homepage (23/10/2026)
+
+Área “Zion in Motion” agora sempre presente na homepage, com cartões verticais em 9:16 (referência 1080 × 1920 px), faixa horizontal responsiva, setas e deslize nativo. Vídeos reais vêm dos registros publicados no CMS. Reprodução inline, silenciosa e em looping, apenas com pelo menos 50% do vídeo visível; pausa fora da tela/aba e preservação da pausa manual. Movimento reduzido exige início manual. Falhas de carregamento têm mensagem própria. Sem arquivos publicados, a área mostra um estado editorial “em breve”; não foram adicionados vídeos comerciais fictícios.
+
+Verificação desta alteração: TypeScript e ESLint aprovados; build Webpack aprovado; 26 testes de navegador desktop/mobile aprovados, incluindo seis cenários novos de Reels. Os três cenários iniciais falharam antes da implementação porque a seção/fixture ainda não existia. Uma expectativa adicional foi corrigida para refletir a navegação móvel: avançar uma tela revela o próximo cartão, não o último da lista. A pausa manual continuou preservada no retorno. No build servido, `/testing/video` responde 404. Capturas da seção pública estão em `docs/screenshots/reels-desktop.png` e `reels-mobile.png`. Os arquivos de vídeo usados na automação são fixtures isoladas; não demonstram a reprodução de conteúdo comercial hospedado nem homologação em aparelho físico iOS/Android.
+
+Situação separada da infraestrutura: o projeto Supabase “Zion Maison” foi criado na organização ads, mas a conexão anterior foi interrompida. Foram confirmadas somente as migrations foundation e storage; não existe `.env.local` configurado nem administradora provisionada. Essa alteração de interface não conclui a conexão Supabase pendente.

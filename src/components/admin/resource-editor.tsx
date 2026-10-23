@@ -425,6 +425,13 @@ export function ResourceEditor({
               </div>
             )}
             {editing.kind === "video" && (
+              <p className="notice full-width">
+                Reels da página inicial: use vídeo vertical em 9:16
+                (recomendado: 1080 × 1920 px), com imagem de capa. A reprodução
+                é em looping e começa sem som.
+              </p>
+            )}
+            {editing.kind === "video" && (
               <label className="full-width">
                 Abrir produto ou look
                 <select

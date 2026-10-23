@@ -1,3 +1,4 @@
+import { ReelsSection } from "@/components/shop/reels-section";
 import { notFound } from "next/navigation";
 import { ProductDetail } from "@/components/shop/product-detail";
 import { ProductCard } from "@/components/shop/product-card";
@@ -27,6 +28,17 @@ export default async function TestingPage({
     content = <ProductEditor initial={fixtureProduct} />;
   else if (screen === "media") content = <MediaLibrary />;
   else if (screen === "admin") content = <Dashboard />;
+  else if (screen === "reels")
+    content = (
+      <ReelsSection
+        items={Array.from({ length: 5 }, (_, i) => ({
+          id: String(i),
+          src: "/testing/video",
+          poster: "/testing/asset",
+          title: `Vídeo de teste ${i + 1}`,
+        }))}
+      />
+    );
   else notFound();
   const badge = (
     <div role="note" className="notice">
