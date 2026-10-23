@@ -35,7 +35,9 @@ try {
       name: "Somente essenciais",
       exact: true,
     });
-    if (await essentials.isVisible()) {await essentials.click();await essentials.waitFor({state:"hidden"});}
+    await essentials.waitFor({ state: "visible" });
+    await essentials.click();
+    await essentials.waitFor({ state: "hidden" });
     await page
       .getByRole("heading", { name: "Elegância que acompanha você." })
       .waitFor();
