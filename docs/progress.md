@@ -1,0 +1,50 @@
+# Registro de execução — Zion Maison
+
+Especificação e implementação aprovadas pela usuária. Desenvolvimento no projeto solicitado, branch local `dev/zion-maison`, sem histórico anterior a isolar. Stack aprovada Next.js/Supabase/Vercel mantida; não foi usado hosting do Sites. Skills de Emil Kowalski instaladas no próprio projeto.
+
+## Implementação
+
+- Loja editorial responsiva, catálogo pesquisável e filtrável, busca com sugestões, produto/galeria/variações, coleções, looks, vídeos, favoritos, seleção e páginas institucionais.
+- Seleção revalidada pelo servidor; snapshot de preços e estoque, mensagem completa e link oficial WhatsApp, sem checkout ou baixa automática.
+- Auth SSR, perfis e permissões verificadas em cada operação, RLS, proteção da última proprietária e bootstrap sem credenciais padrão.
+- Painel: produtos/prévia, estoque, venda/estorno idempotentes, biblioteca/editor de mídias, categorias/coleções, CMS/looks/vídeos, configurações/ordem da homepage, equipe, histórico, dashboard e CSV.
+- Mídias verificadas pelos bytes; Sharp aplica orientação, recorte e rotação, gera derivados e remove EXIF. MediaInfo inspeciona vídeos; não há transcodificação. Originais privados; biblioteca paginada e exclusão com fila durável.
+- Eventos consentidos, preferências entre abas, adaptadores GA4/Pixel, transporte CAPI opt-in sem envio automático, configurações criptografadas, Pushcut com fila/retries/limite e recuperação de resumos, webhook oficial WhatsApp condicionado a assinatura.
+- Retenção: eventos/interesses próximos a 90 dias, arquivo diário anônimo por 13 meses, apresentado separadamente; histórico comercial preservado até definição de política pela operação.
+
+## Revisões e correções
+
+Houve revisão do plano e uma revisão independente do código. Os cinco achados importantes da revisão final foram tratados com testes específicos:
+
+1. Arquivos com assinatura de contêiner sem fluxo de vídeo: substituída confiança no cabeçalho por inspeção MediaInfo. Testados arquivos falsos e WebM sintético real, incluindo rejeição de MIME divergente.
+2. Revogação/reautorização do consentimento e abas: centralizadas permissões dos SDKs e filas; eventos de storage filtrados pela chave de consentimento. Regressões de helper e navegador desktop/mobile.
+3. Contatos por produto: associação persistente dos eventos aos produtos do snapshot real de interesse, preservando um clique global. Regressão SQL.
+4. Resumos perdidos após pausa: cursor persistente e recuperação de intervalos fechados com deduplicação. Regressão SQL.
+5. Arquivos restantes após excluir mídia: exclusão transacional cria trabalho de limpeza, com estado visível, retentativas e remoção de derivados. Regressão SQL e validação dos caminhos.
+
+A verificação adicional corrigiu o pipeline de recorte/rotação, o lease de jobs após interrupção na última tentativa, paginação de listas/seletores e descarte de identificadores após revogação. A prévia do editor e o transform enviado são comparados no navegador. O teste de preço passou a exigir um produto-base válido, evitando falso positivo por UUID inválido.
+
+No smoke de produção, `notFound()` em página com streaming podia manter HTTP 200 embora o conteúdo de teste não fosse renderizado. O proxy passou a bloquear `/testing/*` antes da renderização; regressão observa falha anterior (200) e exige 404 mesmo com a flag de testes em produção. O mesmo princípio garante o redirect HTTP do painel para login antes de iniciar streaming.
+
+## Evidência local em 23/10/2026
+
+- TypeScript estrito e ESLint sem erros no fechamento.
+- Vitest: **44 testes em 8 arquivos**, cobrindo domínio, permissões/RLS, funções PostgreSQL, estoque/idempotência, integrações, consentimento, bytes de mídia e fronteira de produção.
+- Playwright: **20 cenários**, desktop Chrome e viewport iPhone 13 em Chromium, incluindo editor, seleção/WhatsApp, prévia, painel, navegação e consentimento entre abas.
+- Smoke do build servido: `/` e `/catalogo` 200; `/testing/product` e `/testing/asset` 404; `/api/jobs` sem segredo 401; `/admin/produtos` anônimo 307 para login. Capturas desktop/tablet/mobile sem overflow horizontal em `docs/screenshots`.
+- Build de produção: `next build --webpack`. O build Turbopack nesta sandbox encontrou restrição de criação de porta por worker; o comando do projeto usa Webpack e não depende dessa operação.
+- Navegadores e geração dos pequenos fixtures sintéticos foram usados somente para testes; nenhum produto demonstrativo é publicado na loja.
+
+A primeira rodada ampliada do navegador teve dois timeouts durante compilação fria; a configuração passou a usar dois workers e expectativa de 15 segundos. Outra rodada identificou seletor de teste inadequado para o select de proporção; corrigido para o papel acessível de combobox. As rodadas finais devem ser interpretadas pelos resultados abaixo, sem ocultar essas falhas intermediárias.
+
+## Limites e decisões explícitas
+
+A usuária informou que ainda não tem Supabase e pediu as instruções prontas. Portanto, as oito migrations, as políticas de Storage, Auth real, SMTP/convites, upload remoto e persistência ponta a ponta **não foram homologados contra uma instância Supabase**. PGlite executou migrations SQL 1, 2 e 4 a 8; a migration 3 depende do schema gerenciado de Storage. Os testes SQL não substituem uma disputa simultânea entre conexões reais para a última unidade.
+
+Os testes de interface usam fixtures identificadas e respostas HTTP isoladas. Não provam entrega de e-mail, upload remoto, abertura real do aplicativo WhatsApp, entrega de Pushcut ou recepção de eventos em GA/Meta. Sem credenciais, nenhum envio externo foi realizado. A CAPI é somente um adaptador preparado, e o webhook não implica uma conta WhatsApp Business conectada. Entregas externas podem repetir após uma interrupção; não há promessa de exactly-once.
+
+A infraestrutura de mídia preserva originais e referências; uploads abandonados antes de virar registro podem requerer auditoria manual de órfãos. Não há coletor automático desses arquivos. A retenção comercial depende de decisão operacional antes do lançamento; não se apagam vendas ou auditoria automaticamente.
+
+Sem logo original, fotos individuais, catálogo, WhatsApp e políticas finais da operação, foram usados marca tipográfica provisória, arte abstrata em CSS e estados vazios. A imagem de referência não virou mercadoria fictícia. O projeto não foi publicado nem conectado a contas externas.
+
+Próximas ações dependentes da operação estão em `docs/operations/acceptance.md`; o passo a passo de criação do Supabase está em `docs/operations/setup.md`.

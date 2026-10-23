@@ -1,0 +1,28 @@
+export const homeBlocks = [
+  "hero",
+  "values",
+  "categories",
+  "featured",
+  "newest",
+  "popular",
+  "story",
+  "videos",
+  "looks",
+  "editorial",
+  "instagram",
+  "closing",
+] as const;
+export const homeBlockLabels: Record<string, string> = {
+  hero: "Banner principal",
+  values: "Valores da marca",
+  categories: "Categorias",
+  featured: "Escolhas para você",
+  newest: "Novidades",
+  popular: "Mais procuradas",
+  story: "História da marca",
+  videos: "Zion in Motion",
+  looks: "Shop the Look",
+  editorial: "Seções editoriais",
+  instagram: "Instagram",
+  closing: "Encerramento",
+};
