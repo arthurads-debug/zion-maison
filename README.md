@@ -2,7 +2,7 @@
 
 Boutique digital em português com catálogo, seleção de interesses e atendimento pelo WhatsApp. Painel administrativo com produtos, variações, estoque, vendas confirmadas manualmente, mídias, conteúdo editorial, equipe, relatórios e integrações.
 
-**Estado da entrega:** implementação local com testes automatizados. Não há projeto Supabase, credenciais de provedores ou catálogo comercial configurado. Login, persistência remota, e-mails, Storage e entregas externas ainda exigem a homologação descrita abaixo. A interface funciona sem essas credenciais com estados vazios; não existe banco simulado em produção.
+**Estado atual:** Supabase conectado ao ambiente local, oito migrations aplicadas e conta administrativa solicitada criada. Login real, perfil administrativo e consulta do dashboard foram validados. As credenciais ficam exclusivamente em `.env.local`, ignorado pelo Git. Catálogo comercial, políticas finais, entrega de e-mails, fluxo completo de uploads e provedores externos ainda exigem os itens de homologação abaixo. Não existe banco simulado em produção.
 
 ## Iniciar no computador
 
