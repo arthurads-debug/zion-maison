@@ -4,7 +4,7 @@ import { ResponsiveImage } from "@/components/responsive-image";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { useSelection } from "@/components/selection-provider";
-import { money, type Product } from "@/lib/domain";
+import { money, isIllustrativeProduct, type Product } from "@/lib/domain";
 import { Heart, ArrowRight, Plus, Minus, X, ZoomIn } from "./icons";
 import { EditorialVideo } from "./editorial-video";
 export function ProductDetail({
@@ -15,6 +15,7 @@ export function ProductDetail({
   preview?: boolean;
 }) {
   const selection = useSelection();
+  const illustrative = isIllustrativeProduct(product);
   const colors = [
     ...new Set(product.variants.filter((v) => v.active).map((v) => v.color)),
   ];
@@ -36,7 +37,7 @@ export function ProductDetail({
     .sort((a, b) => a.sort_order - b.sort_order);
   const favorite = selection.favorites.includes(product.id);
   function add() {
-    if (preview || !variant || !variant.stock) return;
+    if (preview || illustrative || !variant || !variant.stock) return;
     const existing =
       selection.lines.find((l) => l.variant_id === variant.id)?.quantity || 0;
     if (existing + quantity > variant.stock) {
@@ -133,14 +134,14 @@ export function ProductDetail({
             {variants.map((v) => (
               <button
                 key={v.id}
-                disabled={v.stock === 0}
+                disabled={!illustrative && v.stock === 0}
                 className={size === v.size ? "active" : ""}
                 aria-pressed={size === v.size}
                 onClick={() => {
                   setSize(v.size);
                   setQuantity(1);
                   setAdded(false);
-                  if (!preview)
+                  if (!preview && !illustrative)
                     window.dispatchEvent(
                       new CustomEvent("zion-event", {
                         detail: {
@@ -154,17 +155,21 @@ export function ProductDetail({
                 }}
               >
                 {v.size}
-                {v.stock === 0 && <span className="sr-only"> Esgotado</span>}
+                {!illustrative && v.stock === 0 && (
+                  <span className="sr-only"> Esgotado</span>
+                )}
               </button>
             ))}
           </div>
         </fieldset>
         <p className="stock-description">
-          {variant
-            ? variant.stock > 0
-              ? "Disponível para consulta"
-              : "Esgotado nesta variação"
-            : "Selecione cor e tamanho para continuar."}
+          {illustrative
+            ? "Modelo ilustrativo · sem venda ou reserva"
+            : variant
+              ? variant.stock > 0
+                ? "Disponível para consulta"
+                : "Esgotado nesta variação"
+              : "Selecione cor e tamanho para continuar."}
         </p>
         <div className="quantity">
           <button
@@ -185,19 +190,33 @@ export function ProductDetail({
         </div>
         <button
           className="button full"
-          disabled={preview || !variant || variant.stock < quantity}
+          disabled={
+            preview || illustrative || !variant || variant.stock < quantity
+          }
           onClick={add}
         >
-          {added ? "Adicionado à sua seleção" : "Adicionar à minha seleção"}
+          {illustrative
+            ? "Peça ilustrativa"
+            : added
+              ? "Adicionado à sua seleção"
+              : "Adicionar à minha seleção"}
           <Plus size={17} />
         </button>
+        {illustrative && (
+          <p className="illustrative-product-note">
+            Imagem e valor de exemplo. Esta peça pode ser personalizada no
+            painel e não está disponível para compra.
+          </p>
+        )}
         {added ? (
           <Link className="button outline full" href="/minha-selecao">
             Consultar pelo WhatsApp <ArrowRight size={16} />
           </Link>
         ) : (
           <p className="muted small-text">
-            Adicione sua escolha para preparar a consulta pelo WhatsApp.
+            {illustrative
+              ? "Explore cores e tamanhos para conhecer a apresentação da loja."
+              : "Adicione sua escolha para preparar a consulta pelo WhatsApp."}
           </p>
         )}
         <button

@@ -2380,3 +2380,84 @@ h2 {
   outline: 2px solid var(--coffee);
   outline-offset: 4px;
 }
+.illustrative-product-note {
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  background: #eee7dc;
+  color: #625344;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 15px 0;
+}
+.story-photograph {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+}
+.story-photograph img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  position: absolute;
+  inset: 0;
+}
+.story-photograph > span {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 26px;
+  z-index: 1;
+  color: #fffaf0;
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  text-shadow: 0 1px 8px #0009;
+}
+.document-editorial-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin: 35px 0;
+}
+.hero.has-image::after {
+  background: linear-gradient(
+    90deg,
+    #1c140e9e 0%,
+    #1c140e52 48%,
+    #1c140e00 80%
+  );
+}
+@media (max-width: 850px) {
+  .story-photograph {
+    min-height: 480px;
+  }
+}
+@media (max-width: 600px) {
+  .hero.has-image::after {
+    background: linear-gradient(90deg, #1c140eb3, #1c140e33);
+  }
+  .story-photograph {
+    min-height: 450px;
+  }
+}
+.hero.has-image .hero-photo,
+.story-photograph img,
+.document-editorial-image,
+.product-picture img,
+.category-card img,
+.look-card img,
+.instagram-grid img {
+  object-position: center top;
+}
+/* Editable announcements may wrap on phones without clipping their text. */
+.announcement {
+  height: auto;
+  min-height: 30px;
+  padding: 5px 16px;
+  line-height: 1.5;
+  text-align: center;
+  gap: clamp(12px, 3vw, 45px);
+}
+.announcement > span {
+  flex-shrink: 0;
+}

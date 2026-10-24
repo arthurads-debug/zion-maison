@@ -1,3 +1,4 @@
+import { isIllustrativeProduct } from "@/lib/domain";
 import type { MetadataRoute } from "next";
 import { configured, database } from "@/server/supabase";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -12,12 +13,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (let offset = 0; ; offset += 1000) {
       const { data, error } = await db
         .from("products")
-        .select("slug,updated_at")
+        .select("slug,updated_at,details")
         .eq("status", "published")
         .order("id")
         .range(offset, offset + 999);
       if (error) throw error;
-      for (const p of data || [])
+      for (const p of (data || []).filter((p) => !isIllustrativeProduct(p)))
         result.push({
           url: `${base}/produto/${p.slug}`,
           lastModified: p.updated_at,

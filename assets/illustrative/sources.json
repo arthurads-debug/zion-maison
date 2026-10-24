@@ -1,0 +1,51 @@
+[
+  {
+    "key": "hero",
+    "file": "images/hero.webp",
+    "generation": "exec-e1c0d7bb-8b2a-482e-bbf8-27e2a21cfbba.png",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "key": "sage-dress",
+    "file": "images/sage-dress.webp",
+    "generation": "exec-af89799d-253b-4927-b634-fe943b133b82.png",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "key": "blue-tailoring",
+    "file": "images/blue-tailoring.webp",
+    "generation": "exec-d568c0c0-9bfd-419c-b398-900e5fbb8803.png",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "key": "ivory-lace",
+    "file": "images/ivory-lace.webp",
+    "generation": "exec-f90b59a6-eab0-440f-8e92-42b8b74343c4.png",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "key": "floral-dress",
+    "file": "images/floral-dress.webp",
+    "generation": "exec-8a1434c5-7395-41ae-957b-ef685a34a88d.png",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "key": "black-dress",
+    "file": "images/black-dress.webp",
+    "generation": "exec-26637cdb-1d82-40ff-a02c-899783751cef.png",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "key": "sand-linen",
+    "file": "images/sand-linen.webp",
+    "generation": "exec-eb9366c5-dc75-4a74-9b3f-8434681a84b6.png",
+    "width": 1024,
+    "height": 1536
+  }
+]

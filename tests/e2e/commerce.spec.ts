@@ -328,3 +328,16 @@ test("combination limit counts only new options when expanding an existing range
   await page.getByRole("button", { name: "Criar combinações" }).click();
   await expect(page.getByLabel("Cor", { exact: true })).toHaveCount(65);
 });
+
+test("illustrative catalog pieces stay browsable without becoming a purchase", async ({
+  page,
+}) => {
+  await page.goto("/testing/illustrative");
+  await expect(
+    page.getByText("Imagem e valor de exemplo.", { exact: false }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "P", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Peça ilustrativa", exact: true }),
+  ).toBeDisabled();
+});

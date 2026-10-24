@@ -60,6 +60,12 @@ beforeAll(async () => {
   await db.exec(
     readFileSync("supabase/migrations/202610230008_retention.sql", "utf8"),
   );
+  await db.exec(
+    readFileSync(
+      "supabase/migrations/20261024160318_illustrative_commerce_guard.sql",
+      "utf8",
+    ),
+  );
   await db.exec(`insert into auth.users values ('${owner}','owner@example.test'),('${staff}','staff@example.test');
     insert into public.admin_profiles(user_id,display_name,role,permissions) values
     ('${owner}','Owner','owner','{}'),('${staff}','Staff','staff',array['products.read']);
@@ -356,4 +362,42 @@ it("archives daily counts without identities before removing raw events, idempot
   await expect(
     actor(null, "select * from public.analytics_archive"),
   ).rejects.toThrow();
+});
+
+it("rejects illustrative pieces in the actual intent and sale RPCs, even with stock, and permits conversion", async () => {
+  const pid = crypto.randomUUID(),
+    vid = crypto.randomUUID(),
+    key = crypto.randomUUID();
+  await db.query(
+    "insert into products(id,name,slug,price_cents,status,details) values($1,'Exemplo',$2,10000,'published',$3::jsonb)",
+    [pid, `exemplo-${pid}`, JSON.stringify({ tags: ["ilustrativo"] })],
+  );
+  await db.query(
+    "insert into variants(id,product_id,color,size,stock) values($1,$2,'Areia','P',2)",
+    [vid, pid],
+  );
+  const lines = JSON.stringify([{ variant_id: vid, quantity: 1 }]);
+  await expect(
+    db.query("select create_intent($1,'Teste',$2::jsonb,'/')", [key, lines]),
+  ).rejects.toThrow(/ilustrativ/i);
+  await expect(
+    actor(owner, `select record_sale('${key}','${lines}','Teste')`),
+  ).rejects.toThrow(/ilustrativ/i);
+  expect(
+    (await db.query("select id from purchase_intents where id=$1", [key])).rows,
+  ).toHaveLength(0);
+  expect(
+    (
+      await db.query<{ stock: number }>(
+        "select stock from variants where id=$1",
+        [vid],
+      )
+    ).rows[0].stock,
+  ).toBe(2);
+  await db.query("update products set details='{}'::jsonb where id=$1", [pid]);
+  const result = await db.query(
+    "select create_intent($1,'Teste',$2::jsonb,'/')",
+    [key, lines],
+  );
+  expect(result.rows).toHaveLength(1);
 });

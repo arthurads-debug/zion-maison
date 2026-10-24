@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getProduct, getProducts } from "@/server/catalog";
 import { ProductDetail } from "@/components/shop/product-detail";
 import { ProductCard } from "@/components/shop/product-card";
-import { firstImage } from "@/lib/domain";
+import { firstImage, isIllustrativeProduct } from "@/lib/domain";
 export async function generateMetadata({
   params,
 }: {
@@ -14,6 +14,9 @@ export async function generateMetadata({
   if (!p) return { title: "Peça não encontrada" };
   return {
     title: String(p.details.seo_title || p.name),
+    robots: isIllustrativeProduct(p)
+      ? { index: false, follow: true }
+      : undefined,
     description: String(p.details.seo_description || p.short_description),
     alternates: { canonical: `/produto/${p.slug}` },
     openGraph: { images: firstImage(p)?.url ? [firstImage(p)!.url!] : [] },
@@ -47,12 +50,14 @@ export default async function ProductPage({
   };
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
+      {!isIllustrativeProduct(p) && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
       <div className="breadcrumbs">
         <Link href="/">Início</Link>
         <span>/</span>

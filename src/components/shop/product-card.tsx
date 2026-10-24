@@ -4,7 +4,12 @@ import { ResponsiveImage } from "@/components/responsive-image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useSelection } from "@/components/selection-provider";
-import { firstImage, money, type Product } from "@/lib/domain";
+import {
+  firstImage,
+  money,
+  isIllustrativeProduct,
+  type Product,
+} from "@/lib/domain";
 import { Heart, ArrowUpRight } from "./icons";
 export function ProductCard({
   product,
@@ -15,6 +20,7 @@ export function ProductCard({
 }) {
   const { favorites, toggleFavorite } = useSelection();
   const image = firstImage(product);
+  const illustrative = isIllustrativeProduct(product);
   const alternate =
     !preview &&
     product.media
@@ -26,7 +32,7 @@ export function ProductCard({
   const colors = [
     ...new Set(
       product.variants
-        .filter((v) => v.active && v.stock > 0)
+        .filter((v) => v.active && (illustrative || v.stock > 0))
         .map((v) => v.color),
     ),
   ];
@@ -78,8 +84,10 @@ export function ProductCard({
             }
           />
         </button>
-        {product.promo_cents !== null && (
-          <span className="product-badge">Seleção especial</span>
+        {(illustrative || product.promo_cents !== null) && (
+          <span className="product-badge">
+            {illustrative ? "Ilustrativo" : "Seleção especial"}
+          </span>
         )}
       </div>
       <div className="product-caption">

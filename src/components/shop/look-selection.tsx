@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSelection } from "../selection-provider";
-import { money, type Product } from "@/lib/domain";
+import { money, isIllustrativeProduct, type Product } from "@/lib/domain";
 export function LookSelection({ products }: { products: Product[] }) {
   const selection = useSelection();
   const [chosen, setChosen] = useState<Record<string, string>>({});
@@ -25,9 +25,17 @@ export function LookSelection({ products }: { products: Product[] }) {
             {p.variants
               .filter((v) => v.active)
               .map((v) => (
-                <option value={v.id} key={v.id} disabled={v.stock === 0}>
+                <option
+                  value={v.id}
+                  key={v.id}
+                  disabled={isIllustrativeProduct(p) || v.stock === 0}
+                >
                   {v.color} / {v.size}
-                  {v.stock === 0 ? " — Esgotado" : ""}
+                  {isIllustrativeProduct(p)
+                    ? " — Ilustrativo"
+                    : v.stock === 0
+                      ? " — Esgotado"
+                      : ""}
                 </option>
               ))}
           </select>

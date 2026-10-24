@@ -4,7 +4,7 @@ Esta lista está pendente porque ainda não existe projeto Supabase da loja. Exe
 
 ## Infraestrutura e acesso
 
-- [ ] Aplicar as oito migrations e conferir buckets privado/público.
+- [ ] Aplicar as nove migrations e conferir buckets privado/público.
 - [ ] Criar primeira proprietária pelo bootstrap; confirmar que a repetição é recusada.
 - [ ] Login, logout, convite e recuperação em navegador e celular; testar link expirado e abertura do e-mail em outro aparelho.
 - [ ] Anônimo não lê rascunhos, originais, interesses, relatórios, equipe ou integrações.

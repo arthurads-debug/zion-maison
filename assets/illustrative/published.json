@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "project": "https://dgriechvhyandivvljxx.supabase.co",
+  "assets": {
+    "hero": {
+      "id": "56573809-ba66-489d-a141-8a41444c8067",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/56573809-ba66-489d-a141-8a41444c8067.webp"
+    },
+    "sage-dress": {
+      "id": "aec0cb26-3c19-47ed-b964-cab4d9372f0a",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/aec0cb26-3c19-47ed-b964-cab4d9372f0a.webp"
+    },
+    "ivory-lace": {
+      "id": "57744771-36b3-4784-b1dc-a87d19e2d18a",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/57744771-36b3-4784-b1dc-a87d19e2d18a.webp"
+    },
+    "blue-tailoring": {
+      "id": "183ebdc7-2eb1-41c8-abdb-2aa3c1b61fd7",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/183ebdc7-2eb1-41c8-abdb-2aa3c1b61fd7.webp"
+    },
+    "floral-dress": {
+      "id": "d21208b0-40ef-4d21-a60e-6ea7e79dd042",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/d21208b0-40ef-4d21-a60e-6ea7e79dd042.webp"
+    },
+    "black-dress": {
+      "id": "08009c63-fd53-4b55-afbf-34371c75431a",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/08009c63-fd53-4b55-afbf-34371c75431a.webp"
+    },
+    "sand-linen": {
+      "id": "9cf6a049-4566-4d40-a2e1-046acb63e630",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/9cf6a049-4566-4d40-a2e1-046acb63e630.webp"
+    },
+    "ivory-lace-motion": {
+      "id": "04847656-397b-4127-801d-398a12d61118",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/04847656-397b-4127-801d-398a12d61118.mp4"
+    },
+    "blue-tailoring-motion": {
+      "id": "21f6423d-31b0-4603-b900-423b51347df5",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/21f6423d-31b0-4603-b900-423b51347df5.mp4"
+    },
+    "floral-dress-motion": {
+      "id": "1232c999-5748-4fd4-99f2-6b3502a91fe0",
+      "url": "https://dgriechvhyandivvljxx.supabase.co/storage/v1/object/public/published/1232c999-5748-4fd4-99f2-6b3502a91fe0.mp4"
+    }
+  },
+  "products": [
+    {
+      "id": "ee8900ad-b42b-521e-a8b9-33ba9dadfa1e",
+      "slug": "vestido-renda-gola-alta"
+    },
+    {
+      "id": "90ac9f7f-d643-533f-a98c-1ec7e330df40",
+      "slug": "conjunto-laise-premium"
+    },
+    {
+      "id": "7c01fbc0-82cc-5675-a349-a8b9eaafb32b",
+      "slug": "conjunto-alfaiataria-colete"
+    },
+    {
+      "id": "3f4f47ad-2b18-5443-a125-f8e0193db380",
+      "slug": "vestido-floral-midi"
+    },
+    {
+      "id": "215882e6-8ebb-53bd-abe0-1842d03e2c47",
+      "slug": "vestido-cetim-assimetrico"
+    },
+    {
+      "id": "436f1d98-d1d6-5662-a1a6-c3aa80e800b6",
+      "slug": "conjunto-linho-essencial"
+    }
+  ],
+  "content": [
+    {
+      "id": "2f73a67f-cb80-5145-ad37-52c09955fe73",
+      "kind": "hero",
+      "slug": "banner-principal"
+    },
+    {
+      "id": "559a0033-067e-5ba6-a9d1-1145d59e4275",
+      "kind": "section",
+      "slug": "historia-da-maison"
+    },
+    {
+      "id": "482c5746-12bd-57f2-a14b-e9ad99b776af",
+      "kind": "section",
+      "slug": "editorial-luz-natural"
+    },
+    {
+      "id": "9c7c466d-7723-5df7-a2c3-f6b78965651c",
+      "kind": "look",
+      "slug": "elegancia-em-azul"
+    },
+    {
+      "id": "98a05d79-9cdb-5319-ac07-69271bd4c828",
+      "kind": "look",
+      "slug": "essencia-natural"
+    },
+    {
+      "id": "ef61545e-80f8-572c-abf6-32e5dd5ddb10",
+      "kind": "page",
+      "slug": "sobre"
+    },
+    {
+      "id": "31310b56-07d6-56b9-ad9b-942fe2ffaaae",
+      "kind": "instagram",
+      "slug": "olhar-maison-1"
+    },
+    {
+      "id": "2b8b08ef-4acb-5a3e-a335-14c680e7a206",
+      "kind": "instagram",
+      "slug": "olhar-maison-2"
+    },
+    {
+      "id": "4ccba390-ecd4-53af-a674-c21469453904",
+      "kind": "instagram",
+      "slug": "olhar-maison-3"
+    },
+    {
+      "id": "7d1c57ad-4876-5200-ab6f-fecb554c10b1",
+      "kind": "instagram",
+      "slug": "olhar-maison-4"
+    },
+    {
+      "id": "1abbcd96-fb08-56d9-a0e1-62eb6fd0ddc2",
+      "kind": "video",
+      "slug": "zion-motion-1"
+    },
+    {
+      "id": "3b273993-5fca-5f7a-ab72-241fb98103c3",
+      "kind": "video",
+      "slug": "zion-motion-2"
+    },
+    {
+      "id": "ed19a3ac-bb7b-5c5d-a077-997710338867",
+      "kind": "video",
+      "slug": "zion-motion-3"
+    }
+  ]
+}

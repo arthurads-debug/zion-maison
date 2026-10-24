@@ -1,7 +1,8 @@
 import { whatsappUrl } from "@/lib/whatsapp";
 import { notFound } from "next/navigation";
 import { getContent, getSettings } from "@/server/catalog";
-import { text } from "@/lib/content";
+import { ResponsiveImage } from "@/components/responsive-image";
+import { text, imageUrl } from "@/lib/content";
 const titles: Record<string, string> = {
   sobre: "O universo Zion Maison",
   contato: "Uma conversa, muitas possibilidades.",
@@ -34,7 +35,17 @@ export default async function Document({
       <p className="eyebrow">ZION MAISON</p>
       <h1>{entry?.title || titles[document]}</h1>
       {entry ? (
-        <p>{text(entry.body, "text")}</p>
+        <>
+          {imageUrl(text(entry.body, "image_url")) && (
+            <ResponsiveImage
+              className="document-editorial-image"
+              src={imageUrl(text(entry.body, "image_url"))}
+              alt={entry.title}
+              sizes="(max-width: 850px) 100vw, 800px"
+            />
+          )}
+          <p>{text(entry.body, "text")}</p>
+        </>
       ) : document === "sobre" ? (
         <>
           {settings.about ? (

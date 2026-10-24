@@ -14,7 +14,7 @@ Em **Cadastrar uma peça**, siga quatro etapas:
 A **Prévia ao vivo** usa o mesmo cartão da vitrine e acompanha nome, preço, promoção e capa imediatamente. No celular, toque em “Ver prévia ao vivo” e depois “Continuar editando”. O botão “Prévia” abre a página detalhada, com compra e favoritos desativados. Nada é publicado apenas por editar ou visualizar.
 
 Depois de salvar, abra **Estoque** e informe as quantidades. Novas opções começam com zero para preservar o controle dos movimentos. A prévia respeita o último estoque carregado; sem unidades a peça aparece esgotada. A peça pode ser salva como rascunho enquanto você prepara as informações.
-A publicação exige mídia e variação ativa. Um produto sem estoque continua disponível para consulta quando publicado, mas não pode entrar na seleção com quantidade indisponível. Arquivar retira da loja sem apagar o histórico. Não publique peças ou preços de demonstração.
+A publicação exige mídia e variação ativa. Um produto sem estoque continua disponível para consulta quando publicado, mas não pode entrar na seleção com quantidade indisponível. Arquivar retira da loja sem apagar o histórico. Os exemplos solicitados estão publicados com a marcação “Ilustrativo” e bloqueio de compra. Antes de oferecer uma peça real, substitua foto, descrição e preço, desmarque “Produto ilustrativo” na etapa Publicação e registre o estoque verdadeiro.
 
 O estoque inicial e os ajustes usam movimentos com motivo e controle de versão. A venda confirmada é uma ação administrativa explícita: baixa estoque em transação e guarda os preços daquele momento. Repetir o mesmo envio não duplica a baixa. O estorno gera o movimento inverso e só pode ocorrer uma vez. Se alguém alterar o estoque durante sua edição, atualize a tela antes de tentar novamente.
 
@@ -36,7 +36,7 @@ A área “Zion in Motion” da homepage usa Reels em proporção 9:16. Exporte 
 
 Na área Conteúdo da loja, escolha imagens e vídeos visualmente pelo botão “Escolher arquivo”. O endereço externo é uma opção avançada recolhida, e não um campo obrigatório. Edite banner, imagens desktop/celular, textos, seções, páginas institucionais, Instagram editorial, looks e vídeos. Publicação e ordem pertencem ao conteúdo. A ordem dos blocos principais da homepage é alterada em Configurações; a ordem dos editoriais internos fica no CMS. Novidades usam data de criação; mais procuradas usam pontuação de eventos consentidos. Sem eventos, a ordenação tem desempate estável; não exibe contagens inventadas.
 
-O Instagram é curadoria de imagens e links cadastrados, sem integração automática com uma conta. Looks relacionam produtos reais. Fotos de produtos e o logotipo original ainda precisam ser fornecidos pela loja; a referência visual anexada não foi tratada como catálogo vendável.
+O Instagram é curadoria de imagens e links cadastrados, sem integração automática com uma conta. Looks relacionam produtos reais. A loja está preenchida com imagens geradas para apresentação, seis peças, duas coleções, categorias, looks, editoriais e três vídeos de movimentos sobre imagens estáticas. Tudo pode ser substituído pelo painel. Os originais reais das peças e o logotipo definitivo podem ser fornecidos pela marca depois. A referência visual anexada não foi tratada como catálogo vendável.
 
 ## Equipe
 

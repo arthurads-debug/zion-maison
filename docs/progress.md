@@ -83,3 +83,16 @@ As migrations remotas foram aplicadas por MCP e têm versões de aplicação ger
 - Testes usam dados isolados: nenhum produto, estoque ou conteúdo comercial foi criado no Supabase para demonstrar o redesign. Sessão real de proprietária e rotas públicas conferidas na instância de produção local.
 
 Validação desta entrega: 44 testes de lógica/banco, suíte E2E de 38 casos, regressões de foco e visibilidade da prévia, lint sem avisos, tipagem e build aprovados. Smoke de produção final e capturas em 1440×1000, 820×1180 e 390×844 sem transbordamento horizontal; testes continuam inacessíveis na produção. A captura aguarda fontes e animações finitas para registrar a tela em repouso. Servidor local atualizado na porta 3000; nenhuma publicação externa foi feita.
+
+
+## 24/10/2026 — vitrine ilustrativa completa e editável
+
+A pedido do usuário, a loja foi preenchida com conteúdo de apresentação: sete editoriais gerados por IA, seis peças (18 opções de cor/tamanho), quatro categorias, duas coleções, banner desktop/celular, história da Maison, editorial, página sobre, dois looks, quatro imagens de Instagram e três vídeos verticais. Os vídeos são movimentos sobre stills ilustrativos, 1080×1920, oito segundos, H.264 e sem áudio. Todo conteúdo está nas tabelas e na biblioteca existentes, editável pelo painel.
+
+Os produtos usam a tag `ilustrativo`, estoque zero, identificação visual e bloqueio de compra. A etapa Publicação permite converter em produto real após trocar fotos e dados; produtos ilustrativos não publicam ofertas estruturadas nem entram no sitemap. A importação aditiva preservou o ativo preexistente e foi reexecutada sem duplicar dados (0 produtos/0 conteúdos criados). As cópias otimizadas e os IDs/URLs estão em `assets/illustrative`; originais gerados foram preservados localmente e os arquivos enviados permanecem privados na biblioteca.
+
+A revisão independente encontrou que o helper de validação JS não fazia parte do fluxo transacional real. A migração `20261024160318_illustrative_commerce_guard.sql` acrescenta uma guarda privada SECURITY INVOKER, com search_path vazio e sem execução pública, acionada por triggers antes dos inserts de intenção e venda. Testes exercitam os RPCs reais com estoque positivo, rejeição sem efeitos e conversão ao retirar a tag. A verificação remota aconteceu em transação com rollback: nenhum dado de teste foi persistido. Versão aplicada no Supabase: `20261024160425` (nona migração). Advisors continuam com os avisos preexistentes sobre RPCs intencionais e proteção de senha; nenhuma nova função foi exposta publicamente.
+
+Outro achado corrigido foi a retomada de importação interrompida: somente rascunhos de versão zero com marcador de importação podem ser completados. Itens publicados ou editados ficam preservados. Segunda revisão sem novos achados.
+
+Validação: 47 testes de lógica/banco, 40 testes de navegador, lint sem avisos, tipagem e build aprovados. Aceitação da produção preenchida em desktop e celular: dez URLs públicas acessíveis, todas as fotos carregadas, três vídeos reproduzindo em 1080×1920, nenhum overflow horizontal, exemplos sem compra e sem ofertas estruturadas. A instância local da porta 3000 foi atualizada. Catálogo comercial real, dados de contato e políticas definitivas continuam sendo decisões da loja.

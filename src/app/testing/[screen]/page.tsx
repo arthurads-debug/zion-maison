@@ -21,7 +21,13 @@ export default async function TestingPage({
   const { fixtureProduct } = await import("../../../../tests/fixtures/catalog");
   const { screen } = await params;
   let content: React.ReactNode;
-  if (screen === "product")
+  if (screen === "illustrative")
+    content = (
+      <ProductDetail
+        product={{ ...fixtureProduct, details: { tags: ["ilustrativo"] } }}
+      />
+    );
+  else if (screen === "product")
     content = <ProductDetail product={fixtureProduct} />;
   else if (screen === "card")
     content = <ProductCard product={fixtureProduct} />;

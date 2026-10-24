@@ -150,6 +150,17 @@ export const variantSchema = z.object({
   active: z.boolean().default(true),
   low_stock: z.number().int().min(0).max(10000).default(2),
 });
+/** Editorial examples can be edited into real merchandise by removing this tag. */
+export function isIllustrativeProduct(product: Pick<Product, "details">) {
+  const tags = product.details.tags;
+  return (
+    Array.isArray(tags) &&
+    tags.some(
+      (tag) =>
+        typeof tag === "string" && tag.trim().toLowerCase() === "ilustrativo",
+    )
+  );
+}
 export function reconcileSelection(
   input: SelectionLine[],
   products: Product[],
@@ -168,6 +179,10 @@ export function reconcileSelection(
     if (!product || !variant)
       throw new Error(
         "Esta peça não está mais disponível. Atualize sua seleção.",
+      );
+    if (isIllustrativeProduct(product))
+      throw new Error(
+        "Esta peça é ilustrativa e não está disponível para compra.",
       );
     if (quantity > variant.stock)
       throw new Error(

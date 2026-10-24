@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import {
   slugify,
+  isIllustrativeProduct,
   type Product,
   type Taxonomy,
   type Variant,
@@ -519,6 +520,35 @@ export function ProductEditor({
                 />
                 Destacar na página inicial
               </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={isIllustrativeProduct(product)}
+                  onChange={(event) => {
+                    const tags = (
+                      Array.isArray(product.details.tags)
+                        ? product.details.tags
+                        : []
+                    ).filter(
+                      (tag) =>
+                        typeof tag === "string" &&
+                        tag.trim().toLowerCase() !== "ilustrativo",
+                    );
+                    set("details", {
+                      ...product.details,
+                      tags: event.target.checked
+                        ? [...tags, "ilustrativo"]
+                        : tags,
+                    });
+                  }}
+                />
+                Produto ilustrativo (exemplo sem venda)
+              </label>
+              <p className="muted small-text">
+                Para transformar um exemplo em peça real, substitua as fotos e
+                os dados, desmarque “Produto ilustrativo” e ajuste as
+                quantidades em Estoque.
+              </p>
               <label>
                 Ordem de exibição
                 <input

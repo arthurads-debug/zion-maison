@@ -8,6 +8,9 @@ import {
   type Taxonomy,
   type Content,
 } from "@/lib/domain";
+// Browser fixtures must never depend on, or populate, the merchant's live catalog.
+const isolatedCatalog = () =>
+  process.env.NODE_ENV !== "production" && process.env.ZION_E2E === "1";
 const productSelect =
   "*,variants(*),media:product_media(id,asset_id,color,sort_order,asset:media_assets(id,kind,url,poster_url,alt,published,width,height))";
 export type CatalogFilter = {
@@ -43,7 +46,8 @@ const catalogFilterSchema = z.object({
   featured: z.boolean().optional(),
 });
 export async function getProducts(filters: CatalogFilter = {}) {
-  if (!configured()) return { products: [] as Product[], count: 0 };
+  if (!configured() || isolatedCatalog())
+    return { products: [] as Product[], count: 0 };
   const input = catalogFilterSchema.parse(filters);
   const db = await database();
   const { data, error } = await db.rpc("search_catalog", { p_filters: input });
@@ -54,7 +58,7 @@ export async function getProducts(filters: CatalogFilter = {}) {
   };
 }
 export async function getProduct(slug: string) {
-  if (!configured()) return null;
+  if (!configured() || isolatedCatalog()) return null;
   const db = await database();
   const { data, error } = await db
     .from("products")
@@ -83,7 +87,7 @@ export async function productsForVariants(ids: string[]) {
   return (data ?? []) as unknown as Product[];
 }
 export async function getTaxonomy(kind?: string) {
-  if (!configured()) return [] as Taxonomy[];
+  if (!configured() || isolatedCatalog()) return [] as Taxonomy[];
   const db = await database();
   let query = db
     .from("taxonomy")
@@ -96,7 +100,7 @@ export async function getTaxonomy(kind?: string) {
   return (data ?? []) as Taxonomy[];
 }
 export async function getContent(kind?: string) {
-  if (!configured()) return [] as Content[];
+  if (!configured() || isolatedCatalog()) return [] as Content[];
   const db = await database();
   let query = db
     .from("content_entries")
@@ -109,7 +113,7 @@ export async function getContent(kind?: string) {
   return (data ?? []) as Content[];
 }
 export async function getSettings() {
-  if (!configured()) return publicSettings;
+  if (!configured() || isolatedCatalog()) return publicSettings;
   const db = await database();
   const { data, error } = await db
     .from("site_settings")

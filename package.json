@@ -13,7 +13,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "bootstrap": "tsx --env-file=.env.local scripts/bootstrap-owner.ts",
-    "worker": "tsx --env-file=.env.local scripts/run-worker.ts"
+    "worker": "tsx --env-file=.env.local scripts/run-worker.ts",
+    "seed:illustrative": "node --conditions=react-server --env-file=.env.local --import tsx scripts/seed-illustrative-store.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

@@ -6,7 +6,7 @@ Use um projeto de desenvolvimento separado do de produção. Você ainda não pr
 
 Crie um projeto no [Supabase](https://supabase.com/dashboard), escolha uma região adequada e guarde a senha do banco em seu gerenciador de senhas. Aguarde a criação dos serviços.
 
-Nas configurações de API do projeto, obtenha a URL, a chave pública `anon` e a chave secreta `service_role`. O código usa a chave legada `service_role` para chamadas administrativas autenticadas do servidor. Nunca coloque essa chave em uma variável `NEXT_PUBLIC_*` ou no navegador.
+Nas configurações de API do projeto, obtenha a URL, a chave pública publishable e a chave secreta de servidor. Os nomes de variáveis `ANON_KEY` e `SERVICE_ROLE_KEY` foram preservados por compatibilidade; o projeto conectado usa as chaves modernas do Supabase. Nunca coloque essa chave em uma variável `NEXT_PUBLIC_*` ou no navegador.
 
 ```dotenv
 NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000
@@ -37,6 +37,7 @@ No SQL Editor do projeto **vazio de desenvolvimento**, execute os arquivos de `s
 6. `202610230006_catalog_search.sql`
 7. `202610230007_contact_and_summaries.sql`
 8. `202610230008_retention.sql`
+9. `20261024160318_illustrative_commerce_guard.sql`
 
 Todas são necessárias antes de abrir o painel. Algumas funções referenciam estruturas de migrations posteriores, resolvidas na execução. Não execute funções do aplicativo com o conjunto aplicado parcialmente. Não reaplique migrations já executadas; elas não são um script de reset.
 
@@ -58,9 +59,13 @@ Nos templates de **convite** e **recuperação de senha**, use links com `TokenH
 
 ```html
 <!-- Convite -->
-<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=invite">Definir minha senha</a>
+<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=invite"
+  >Definir minha senha</a
+>
 <!-- Recuperação -->
-<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery">Redefinir minha senha</a>
+<a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery"
+  >Redefinir minha senha</a
+>
 ```
 
 O callback PKCE também existe para o fluxo iniciado pelo mesmo navegador. Os links só aceitam destinos internos previstos. Consulte a documentação de [Auth com SSR](https://supabase.com/docs/guides/auth/server-side/nextjs) e [templates](https://supabase.com/docs/guides/auth/auth-email-templates).
@@ -86,3 +91,11 @@ O script cria usuário e perfil `owner` e recusa criar uma nova primeira proprie
 Reinicie `pnpm dev` após mudar variáveis. No painel, configure WhatsApp em formato internacional sem `+`, Instagram, identificação comercial e textos. Envie a identidade visual e fotos reais pela biblioteca, crie categorias e produtos como rascunho e publique somente após preencher preço, variações, disponibilidade e mídia verificada.
 
 Conclua o [checklist com serviços reais](acceptance.md). Se uma migration ou login falhar, guarde o nome da etapa e a mensagem sanitizada, sem copiar chaves ou senhas.
+
+## 6. Vitrine ilustrativa opcional
+
+A loja conectada já recebeu o conteúdo de exemplo solicitado. Todas as imagens, peças, valores, coleções e vídeos podem ser substituídos pelo painel. Não é necessário executar outro comando para editar.
+
+Para preparar um novo ambiente vazio com os mesmos assets, use `pnpm seed:illustrative` após configurar o banco e a proprietária. O script é aditivo, preserva edições e mantém estoque zero; a tag `ilustrativo` impede interesse e venda nos RPCs do banco. Na etapa Publicação do produto existe um controle para remover a condição ilustrativa depois de cadastrar fotos, dados e estoque reais.
+
+Migração aplicada no projeto conectado com versão remota `20261024160425`, correspondente ao arquivo local `20261024160318_illustrative_commerce_guard.sql`. Preserve o histórico existente ao usar a CLI; não reaplique as oito migrações anteriores.

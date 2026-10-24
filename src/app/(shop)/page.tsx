@@ -14,7 +14,7 @@ import { text, safeLink, imageUrl } from "@/lib/content";
 export default async function Home() {
   const [{ products }, content, categories, newest, popular, settings] =
     await Promise.all([
-      getProducts({ featured: true }),
+      getProducts({ featured: true, sort: "featured" }),
       getContent(),
       getTaxonomy("category"),
       getProducts({ sort: "newest" }),
@@ -24,7 +24,13 @@ export default async function Home() {
   const hero = content.find((c) => c.kind === "hero");
   const heroImage = imageUrl(text(hero?.body ?? {}, "image_url"));
   const mobileImage = imageUrl(text(hero?.body ?? {}, "mobile_image_url"));
-  const sections = content.filter((c) => c.kind === "section");
+  const story = content.find(
+    (c) => c.kind === "section" && c.slug === "historia-da-maison",
+  );
+  const storyImage = imageUrl(text(story?.body ?? {}, "image_url"));
+  const sections = content.filter(
+    (c) => c.kind === "section" && c.id !== story?.id,
+  );
   const videos = content.filter((c) => c.kind === "video");
   const looks = content.filter((c) => c.kind === "look");
   const instagram = content.filter((c) => c.kind === "instagram");
@@ -203,23 +209,44 @@ export default async function Home() {
           ),
       )}
       <section data-home-block="story" className="maison-story">
-        <div className="story-emblem">
-          <span>PERSONALIDADE · QUALIDADE · VERSATILIDADE</span>
-          <strong>Z</strong>
-          <small>MAISON</small>
-        </div>
+        {storyImage ? (
+          <div className="story-photograph">
+            <ResponsiveImage
+              src={storyImage}
+              alt="Editorial ilustrativo da Zion Maison em tons naturais"
+              sizes="(max-width: 850px) 100vw, 50vw"
+              loading="lazy"
+            />
+            <span>ZION MAISON · MODA COM SIGNIFICADO</span>
+          </div>
+        ) : (
+          <div className="story-emblem">
+            <span>PERSONALIDADE · QUALIDADE · VERSATILIDADE</span>
+            <strong>Z</strong>
+            <small>MAISON</small>
+          </div>
+        )}
         <div className="story-copy">
-          <p className="eyebrow">O universo Zion</p>
+          <p className="eyebrow">
+            {text(story?.body ?? {}, "subtitle", "O universo Zion")}
+          </p>
           <h2>
-            Mais que moda,
-            <br />
-            uma maneira de
-            <br />
-            <em>se expressar.</em>
+            {story?.title || (
+              <>
+                Mais que moda,
+                <br />
+                uma maneira de
+                <br />
+                <em>se expressar.</em>
+              </>
+            )}
           </h2>
           <p>
-            Acreditamos em uma moda atemporal, com peças que valorizam a sua
-            essência e acompanham cada momento da vida.
+            {text(
+              story?.body ?? {},
+              "text",
+              "Acreditamos em uma moda atemporal, com peças que valorizam a sua essência e acompanham cada momento da vida.",
+            )}
           </p>
           <Link href="/sobre" className="text-link">
             Conheça nossa história <ArrowRight size={16} />
