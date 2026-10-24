@@ -5,6 +5,8 @@ import { ProductCard } from "@/components/shop/product-card";
 import { Cart } from "@/components/shop/selection";
 import { ProductEditor } from "@/components/admin/product-editor";
 import { AdminShell } from "@/components/admin/shell";
+import { ResourceEditor } from "@/components/admin/resource-editor";
+import { AdminHome } from "@/components/admin/home";
 import { Dashboard } from "@/components/admin/dashboard";
 import { MediaLibrary } from "@/components/admin/media-library";
 import "../../admin/admin.css";
@@ -27,7 +29,21 @@ export default async function TestingPage({
   else if (screen === "editor")
     content = <ProductEditor initial={fixtureProduct} />;
   else if (screen === "media") content = <MediaLibrary />;
-  else if (screen === "admin") content = <Dashboard />;
+  else if (screen === "content")
+    content = <ResourceEditor resource="content" title="Conteúdo da loja" />;
+  else if (screen === "reports") content = <Dashboard />;
+  else if (screen === "admin")
+    content = (
+      <AdminHome
+        profile={{
+          user_id: "test",
+          display_name: "Proprietária",
+          role: "owner",
+          active: true,
+          permissions: [],
+        }}
+      />
+    );
   else if (screen === "reels")
     content = (
       <ReelsSection
@@ -45,7 +61,7 @@ export default async function TestingPage({
       AMBIENTE DE TESTE — produtos e métricas fictícios, isolados da produção.
     </div>
   );
-  return ["editor", "admin", "media"].includes(screen) ? (
+  return ["editor", "admin", "reports", "media", "content"].includes(screen) ? (
     <AdminShell
       profile={{
         user_id: "11111111-1111-4111-8111-111111111111",

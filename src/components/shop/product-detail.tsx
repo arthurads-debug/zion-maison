@@ -7,12 +7,21 @@ import { useSelection } from "@/components/selection-provider";
 import { money, type Product } from "@/lib/domain";
 import { Heart, ArrowRight, Plus, Minus, X, ZoomIn } from "./icons";
 import { EditorialVideo } from "./editorial-video";
-export function ProductDetail({ product }: { product: Product }) {
+export function ProductDetail({
+  product,
+  preview = false,
+}: {
+  product: Product;
+  preview?: boolean;
+}) {
   const selection = useSelection();
   const colors = [
     ...new Set(product.variants.filter((v) => v.active).map((v) => v.color)),
   ];
-  const [color, setColor] = useState(colors[0] || "");
+  const [selectedColor, setColor] = useState(colors[0] || "");
+  const color = colors.includes(selectedColor)
+    ? selectedColor
+    : colors[0] || "";
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -27,7 +36,7 @@ export function ProductDetail({ product }: { product: Product }) {
     .sort((a, b) => a.sort_order - b.sort_order);
   const favorite = selection.favorites.includes(product.id);
   function add() {
-    if (!variant || !variant.stock) return;
+    if (preview || !variant || !variant.stock) return;
     const existing =
       selection.lines.find((l) => l.variant_id === variant.id)?.quantity || 0;
     if (existing + quantity > variant.stock) {
@@ -131,16 +140,17 @@ export function ProductDetail({ product }: { product: Product }) {
                   setSize(v.size);
                   setQuantity(1);
                   setAdded(false);
-                  window.dispatchEvent(
-                    new CustomEvent("zion-event", {
-                      detail: {
-                        type: "select_variant",
-                        product_id: product.id,
-                        variant_id: v.id,
-                        data: { color: v.color, size: v.size },
-                      },
-                    }),
-                  );
+                  if (!preview)
+                    window.dispatchEvent(
+                      new CustomEvent("zion-event", {
+                        detail: {
+                          type: "select_variant",
+                          product_id: product.id,
+                          variant_id: v.id,
+                          data: { color: v.color, size: v.size },
+                        },
+                      }),
+                    );
                 }}
               >
                 {v.size}
@@ -175,7 +185,7 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
         <button
           className="button full"
-          disabled={!variant || variant.stock < quantity}
+          disabled={preview || !variant || variant.stock < quantity}
           onClick={add}
         >
           {added ? "Adicionado à sua seleção" : "Adicionar à minha seleção"}
@@ -192,7 +202,10 @@ export function ProductDetail({ product }: { product: Product }) {
         )}
         <button
           className="text-link favorite-detail"
-          onClick={() => selection.toggleFavorite(product.id)}
+          disabled={preview}
+          onClick={() => {
+            if (!preview) selection.toggleFavorite(product.id);
+          }}
           aria-pressed={favorite}
         >
           <Heart size={17} fill={favorite ? "currentColor" : "none"} />

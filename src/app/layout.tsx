@@ -1,5 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import localFont from "next/font/local";
+const reading = localFont({
+  src: "./fonts/Manrope.ttf",
+  variable: "--font-reading",
+  display: "swap",
+  weight: "200 800",
+});
+const editorial = localFont({
+  src: [
+    { path: "./fonts/Lora.ttf", weight: "400 700", style: "normal" },
+    { path: "./fonts/Lora-Italic.ttf", weight: "400 700", style: "italic" },
+  ],
+  variable: "--font-editorial",
+  display: "swap",
+});
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000",
@@ -24,7 +39,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth">
+    <html
+      className={`${reading.variable} ${editorial.variable}`}
+      lang="pt-BR"
+      data-scroll-behavior="smooth"
+    >
       <body>
         <a className="skip-link" href="#conteudo">
           Pular para o conteúdo

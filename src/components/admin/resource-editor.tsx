@@ -1,4 +1,5 @@
 "use client";
+import { AssetField } from "./asset-field";
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X } from "lucide-react";
 import { useResource, adminRequest, errorMessage } from "./api";
@@ -21,11 +22,11 @@ type Row = {
 const bodyFields = [
   ["subtitle", "Subtítulo"],
   ["text", "Texto"],
-  ["image_url", "Fotografia principal (URL)"],
-  ["mobile_image_url", "Fotografia mobile (URL)"],
+  ["image_url", "Fotografia principal"],
+  ["mobile_image_url", "Fotografia para celular"],
   ["alt", "Descrição acessível da imagem"],
-  ["video_url", "Vídeo otimizado (URL)"],
-  ["poster_url", "Capa do vídeo (URL)"],
+  ["video_url", "Vídeo da loja"],
+  ["poster_url", "Capa do vídeo"],
   ["cta_label", "Texto do botão"],
   ["cta_href", "Destino do botão"],
 ] as const;
@@ -184,11 +185,11 @@ export function ResourceEditor({
               >
                 {(resource === "content"
                   ? [
-                      ["hero", "Hero principal"],
-                      ["section", "Seção da homepage"],
+                      ["hero", "Banner principal"],
+                      ["section", "Seção da página inicial"],
                       ["page", "Página institucional"],
                       ["look", "Shop the Look"],
-                      ["video", "Zion in Motion"],
+                      ["video", "Vídeos da loja"],
                       ["instagram", "Instagram editorial"],
                       ["campaign", "Campanha"],
                     ]
@@ -228,19 +229,12 @@ export function ResourceEditor({
                     onChange={(e) => patch({ description: e.target.value })}
                   />
                 </label>
-                <label className="full-width">
-                  Imagem
-                  <input
-                    value={editing.image_url || ""}
-                    onChange={(e) => patch({ image_url: e.target.value })}
-                  />
-                  <button
-                    className="text-link"
-                    onClick={() => setLibrary("taxonomy")}
-                  >
-                    Escolher na biblioteca
-                  </button>
-                </label>
+                <AssetField
+                  label="Imagem da coleção ou categoria"
+                  value={editing.image_url || ""}
+                  onChange={(value) => patch({ image_url: value })}
+                  onChoose={() => setLibrary("taxonomy")}
+                />
                 <label className="checkbox-label">
                   <input
                     type="checkbox"
@@ -269,39 +263,42 @@ export function ResourceEditor({
                       editing.kind === "video" ||
                       (key !== "video_url" && key !== "poster_url"),
                   )
-                  .map(([key, label]) => (
-                    <label
-                      className={key === "text" ? "full-width" : ""}
-                      key={key}
-                    >
-                      {label}
-                      {key === "text" ? (
-                        <textarea
-                          rows={6}
-                          value={String(editing.body?.[key] || "")}
-                          onChange={(e) => body(key, e.target.value)}
-                        />
-                      ) : (
-                        <input
-                          value={String(editing.body?.[key] || "")}
-                          onChange={(e) => body(key, e.target.value)}
-                        />
-                      )}
-                      {[
-                        "image_url",
-                        "mobile_image_url",
-                        "video_url",
-                        "poster_url",
-                      ].includes(key) && (
-                        <button
-                          className="text-link"
-                          onClick={() => setLibrary(key)}
-                        >
-                          Escolher na biblioteca
-                        </button>
-                      )}
-                    </label>
-                  ))}
+                  .map(([key, label]) =>
+                    [
+                      "image_url",
+                      "mobile_image_url",
+                      "video_url",
+                      "poster_url",
+                    ].includes(key) ? (
+                      <AssetField
+                        key={key}
+                        label={label}
+                        value={String(editing.body?.[key] || "")}
+                        video={key === "video_url"}
+                        onChange={(value) => body(key, value)}
+                        onChoose={() => setLibrary(key)}
+                      />
+                    ) : (
+                      <label
+                        className={key === "text" ? "full-width" : ""}
+                        key={key}
+                      >
+                        {label}
+                        {key === "text" ? (
+                          <textarea
+                            rows={6}
+                            value={String(editing.body?.[key] || "")}
+                            onChange={(e) => body(key, e.target.value)}
+                          />
+                        ) : (
+                          <input
+                            value={String(editing.body?.[key] || "")}
+                            onChange={(e) => body(key, e.target.value)}
+                          />
+                        )}
+                      </label>
+                    ),
+                  )}
               </>
             )}
             {associations && (
@@ -497,7 +494,21 @@ export function ResourceEditor({
                     {row.title || row.name}
                     <small className="table-subtitle">/{row.slug}</small>
                   </td>
-                  <td>{row.kind}</td>
+                  <td>
+                    {(
+                      {
+                        hero: "Banner principal",
+                        section: "Seção da loja",
+                        page: "Página",
+                        look: "Look",
+                        video: "Vídeo",
+                        instagram: "Instagram",
+                        campaign: "Campanha",
+                        category: "Categoria",
+                        collection: "Coleção",
+                      } as Record<string, string>
+                    )[row.kind] || row.kind}
+                  </td>
                   <td>{row.sort_order}</td>
                   <td>
                     <span

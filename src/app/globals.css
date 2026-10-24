@@ -4,8 +4,8 @@
   --color-champagne: #e9dfcf;
   --color-coffee: #6a4936;
   --color-graphite: #22201f;
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Bodoni MT", Didot, "Times New Roman", serif;
+  --font-sans: var(--font-reading), Arial, sans-serif;
+  --font-serif: var(--font-editorial), Georgia, serif;
 }
 :root {
   --ivory: #f8f5ef;
@@ -15,8 +15,12 @@
   --ink: #22201f;
   --muted: #756c64;
   --line: #ded5ca;
-  --serif: "Bodoni MT", Didot, "Times New Roman", serif;
-  --sans: "Helvetica Neue", Arial, sans-serif;
+  --serif: var(--font-editorial), Georgia, serif;
+  --brand-serif: "Bodoni MT", Didot, Georgia, serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --sans: var(--font-reading), Arial, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -29,7 +33,7 @@ body {
   margin: 0;
   background: var(--ivory);
   color: var(--ink);
-  font: 14px/1.6 var(--sans);
+  font: 15px/1.7 var(--sans);
   -webkit-font-smoothing: antialiased;
 }
 a {
@@ -65,7 +69,7 @@ button:active,
   transform: scale(0.98);
 }
 button {
-  transition: transform 160ms ease-out;
+  transition: transform 160ms var(--ease-out);
 }
 a,
 button {
@@ -251,7 +255,7 @@ button.icon-button {
   min-height: 90px;
 }
 .wordmark {
-  font-family: var(--serif);
+  font-family: var(--brand-serif);
   font-size: 49px;
   line-height: 0.8;
   letter-spacing: -0.07em;
@@ -2053,4 +2057,326 @@ label > textarea {
     width: 48px;
     height: 48px;
   }
+}
+
+/* Readable editorial rhythm and motion for the public Maison. */
+h1,
+h2 {
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.hero {
+  min-height: min(780px, calc(100svh - 120px));
+}
+.hero-content {
+  width: 64%;
+  padding-top: 80px;
+  padding-bottom: 120px;
+}
+.hero-content h1 {
+  font-size: clamp(48px, 5.5vw, 88px);
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+  max-width: 850px;
+  margin: 26px 0;
+}
+.hero-content .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.17em;
+}
+.hero-description {
+  font-size: 15px;
+  max-width: 365px;
+  line-height: 1.85;
+}
+.hero-content em {
+  font-weight: 400;
+}
+.hero-content > * {
+  animation: maison-enter 850ms var(--ease-out) both;
+}
+.hero-content > :nth-child(2) {
+  animation-delay: 60ms;
+}
+.hero-content > :nth-child(3) {
+  animation-delay: 120ms;
+}
+.hero-content > :nth-child(4) {
+  animation-delay: 180ms;
+}
+.hero-photo {
+  animation: maison-image-enter 1400ms var(--ease-out) both;
+}
+.hero-art {
+  background:
+    radial-gradient(ellipse at 10% 10%, #f5e5ce, transparent 55%), #cdb597;
+}
+.hero-monogram {
+  font-family: var(--brand-serif);
+  animation: maison-art-enter 1600ms var(--ease-out) both;
+}
+.hero-bottom {
+  font-size: 10px;
+}
+.desktop-nav {
+  font-size: 13px;
+}
+.announcement {
+  font-size: 11px;
+}
+.section-top h2,
+.section-heading h2 {
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.2;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+.button,
+.button.small {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  min-height: 46px;
+}
+.text-link {
+  font-size: 13px;
+}
+.product-caption h3 {
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.product-price {
+  font-size: 15px;
+}
+.product-colors {
+  font-size: 12px;
+}
+.product-picture {
+  position: relative;
+  overflow: hidden;
+}
+.product-picture > a {
+  display: block;
+  height: 100%;
+}
+.product-picture img {
+  transition:
+    transform 650ms var(--ease-out),
+    opacity 350ms var(--ease-out);
+}
+.product-picture .product-alternate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+.favorite-button {
+  transition:
+    transform 160ms var(--ease-out),
+    color 160ms ease,
+    background-color 160ms ease;
+}
+.favorite-button.selected {
+  background: #fffaf2;
+  color: #6a4936;
+}
+.product-information h1 {
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.25;
+}
+.product-information > p.muted,
+.product-accordions p {
+  font-size: 15px;
+  line-height: 1.9;
+}
+.product-information fieldset legend,
+.choice-options button {
+  font-size: 13px;
+}
+.story-copy > p:not(.eyebrow),
+.editorial-copy > p:not(.eyebrow),
+.closing-section p {
+  font-size: 15px;
+  line-height: 1.9;
+}
+.site-footer {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.site-footer > div > a,
+.site-footer .text-link {
+  font-size: 13px;
+}
+@keyframes maison-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes maison-image-enter {
+  from {
+    opacity: 0.5;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes maison-art-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-picture img {
+    transform: scale(1.035);
+  }
+  .product-card:hover .product-picture .product-alternate {
+    opacity: 1;
+  }
+  .desktop-nav a {
+    position: relative;
+  }
+  .desktop-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms var(--ease-out);
+  }
+  .desktop-nav a:hover::after {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 850px) {
+  .hero {
+    min-height: 620px;
+  }
+  .hero-content {
+    width: 72%;
+    padding: 65px 6% 110px;
+  }
+  .hero-content h1 {
+    font-size: clamp(46px, 7vw, 64px);
+  }
+}
+@media (max-width: 600px) {
+  .hero {
+    min-height: 660px;
+    align-items: flex-start;
+  }
+  .hero-content {
+    width: 100%;
+    padding: 58px 7% 110px;
+  }
+  .hero-content h1 {
+    font-size: clamp(41px, 10.5vw, 58px);
+    line-height: 1.14;
+    max-width: 440px;
+  }
+  .hero-content .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+  }
+  .hero-description {
+    font-size: 14px;
+    max-width: 280px;
+  }
+  .hero-art {
+    inset: 0 0 0 44%;
+    opacity: 0.55;
+  }
+  .hero:not(.has-image)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #eee5d9 5%, #eee5d9bb 42%, transparent);
+    pointer-events: none;
+  }
+  .hero-bottom {
+    z-index: 2;
+  }
+  .hero-bottom > span {
+    font-size: 9px;
+  }
+  .hero-bottom > span:nth-child(2) {
+    max-width: 135px;
+    text-align: center;
+  }
+  .section-top {
+    align-items: flex-end;
+    gap: 18px;
+  }
+  .section-top h2,
+  .section-heading h2 {
+    font-size: 30px;
+  }
+  .section-top .text-link {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .product-caption h3 {
+    font-size: 13px;
+  }
+  .product-price {
+    font-size: 14px;
+  }
+  .product-colors {
+    font-size: 11px;
+  }
+  .eyebrow {
+    font-size: 10px;
+  }
+  .story-copy > p:not(.eyebrow),
+  .editorial-copy > p:not(.eyebrow) {
+    font-size: 14px;
+  }
+  .product-information h1 {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-content > *,
+  .hero-photo,
+  .hero-monogram {
+    animation: none;
+  }
+  .product-picture img,
+  .favorite-button,
+  .desktop-nav a::after {
+    transition: none;
+  }
+  .product-card:hover .product-picture img {
+    transform: none;
+  }
+}
+/* Tailwind's .outline utility must not add a second resting border. */
+.button.outline {
+  outline: none;
+}
+.button.outline:focus-visible {
+  outline: 2px solid var(--coffee);
+  outline-offset: 4px;
 }

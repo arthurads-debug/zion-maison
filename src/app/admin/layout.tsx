@@ -1,6 +1,6 @@
 import "./admin.css";
 export const metadata = {
-  title: "Administração | Zion Maison",
+  title: "Administração",
   robots: { index: false, follow: false },
 };
 export const dynamic = "force-dynamic";

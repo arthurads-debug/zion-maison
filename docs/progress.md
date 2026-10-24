@@ -70,3 +70,16 @@ Verificação real: login com senha pelo Supabase Auth, leitura do próprio perf
 Advisors consultados: nenhuma tabela pública sem RLS; os avisos de execução de SECURITY DEFINER correspondem às funções RPC intencionais de catálogo e operações protegidas por permissões. Referências de revisão: https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable e https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable. O provedor também informa proteção de senhas vazadas desativada; essa configuração padrão não foi alterada: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection.
 
 As migrations remotas foram aplicadas por MCP e têm versões de aplicação geradas pelo provedor. Antes de adotar `supabase db push`, reconciliar esse histórico com os nomes locais usando o fluxo oficial de migration repair, sem reaplicar o esquema. A conexão confirmada não equivale a homologação de e-mails, uploads de ponta a ponta ou entregas de GA/Meta/Pushcut, que continuam no checklist operacional.
+
+
+## 24/10/2026 — operação simplificada e vitrine mais legível
+
+- Início administrativo focado em tarefas, com relatórios mantidos na rota própria; navegação agrupada conforme permissões, atalhos e guia de primeiros passos.
+- Cadastro de peças em quatro etapas, cartão da loja atualizado em tempo real, prévia detalhada sem compra/favoritos/eventos, gerador de combinações que preserva IDs/estoque e elimina duplicação; verificação local com mensagens legíveis e valores em formato brasileiro.
+- Escolha de mídia visual no conteúdo, com miniaturas e links externos recolhidos; tipos traduzidos para linguagem da operação.
+- Lora e Manrope locais, licenças preservadas; hierarquia, tamanhos e entrelinhas revistos. Entrada editorial e revelação ao rolar por CSS/WAAPI, com conteúdo visível sem JavaScript, preferências de movimento respeitadas e hover restrito a mouse.
+- Menu móvel com foco inicial, contenção de Tab, Escape, retorno de foco, bloqueio de rolagem de fundo e conteúdo recolhido inerte.
+- Revisão independente identificou um cálculo de limite antes da deduplicação: corrigido e coberto por expansão 62→65 variações. Segunda revisão sem novos achados acionáveis.
+- Testes usam dados isolados: nenhum produto, estoque ou conteúdo comercial foi criado no Supabase para demonstrar o redesign. Sessão real de proprietária e rotas públicas conferidas na instância de produção local.
+
+Validação desta entrega: 44 testes de lógica/banco, suíte E2E de 38 casos, regressões de foco e visibilidade da prévia, lint sem avisos, tipagem e build aprovados. Smoke de produção final e capturas em 1440×1000, 820×1180 e 390×844 sem transbordamento horizontal; testes continuam inacessíveis na produção. A captura aguarda fontes e animações finitas para registrar a tela em repouso. Servidor local atualizado na porta 3000; nenhuma publicação externa foi feita.

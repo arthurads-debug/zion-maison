@@ -41,6 +41,7 @@ export default async function Home() {
             )}
             <ResponsiveImage
               className="hero-photo"
+              sizes="100vw"
               src={heroImage}
               alt={text(hero?.body ?? {}, "alt", "Editorial Zion Maison")}
               fetchPriority="high"

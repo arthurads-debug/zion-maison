@@ -101,3 +101,33 @@ test("cross-tab consent revokes identifiers and stops events, then permits event
   await expect.poll(() => count).toBeGreaterThan(stopped);
   await second.close();
 });
+
+test("editorial motion respects reduced motion and preserves readable content", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const title = page.getByRole("heading", {
+    name: "Elegância que acompanha você.",
+  });
+  await expect(title).toBeVisible();
+  expect(await title.evaluate((el) => getComputedStyle(el).animationName)).toBe(
+    "none",
+  );
+  expect(
+    await title.evaluate(
+      (el) =>
+        parseFloat(getComputedStyle(el).lineHeight) /
+        parseFloat(getComputedStyle(el).fontSize),
+    ),
+  ).toBeGreaterThan(1.1);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page
+    .getByRole("link", { name: "Explorar coleção", exact: true })
+    .click();
+  await expect(page).toHaveURL(/catalogo/);
+});

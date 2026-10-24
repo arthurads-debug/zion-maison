@@ -1,3 +1,4 @@
+import { StoreMotion } from "@/components/shop/store-motion";
 import Link from "next/link";
 import { getSettings } from "@/server/catalog";
 import { Header, Wordmark } from "@/components/shop/header";
@@ -16,7 +17,9 @@ export default async function ShopLayout({
   return (
     <>
       <Header settings={settings} />
-      <main id="conteudo">{children}</main>
+      <main id="conteudo">
+        <StoreMotion>{children}</StoreMotion>
+      </main>
       <footer className="site-footer">
         <div className="footer-brand">
           <Wordmark settings={settings} />

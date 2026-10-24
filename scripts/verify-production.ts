@@ -47,6 +47,18 @@ try {
       )
     )
       throw new Error(`Overflow: ${name}`);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.allSettled(
+        document
+          .getAnimations()
+          .filter(
+            (animation) =>
+              animation.effect?.getTiming().iterations !== Infinity,
+          )
+          .map((animation) => animation.finished),
+      );
+    });
     await page.screenshot({ path: `docs/screenshots/home-${name}.png` });
     console.log("captura e largura:", name);
     await page.close();
