@@ -1,0 +1,292 @@
+/* Public-store type scale. Local fonts stay self-hosted; admin has its own scale. */
+.storefront {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.storefront h1,
+.storefront h2 {
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.storefront .hero-content h1 {
+  letter-spacing: -0.035em;
+}
+.storefront .product-price,
+.storefront .detail-price {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+@media (max-width: 850px) {
+  .storefront {
+    --mobile-heading: clamp(27px, 6.8vw, 34px);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .storefront h1,
+  .storefront h2,
+  .storefront h3 {
+    overflow-wrap: anywhere;
+  }
+  .storefront h1,
+  .storefront h2 {
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+  }
+  .storefront p {
+    text-wrap: pretty;
+  }
+  .storefront .eyebrow,
+  .storefront .section-top .eyebrow,
+  .storefront .page-intro .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.65;
+  }
+  .storefront .section-top h2,
+  .storefront .section-heading h2,
+  .storefront .editorial-section h2,
+  .storefront .empty-state h2 {
+    font-size: var(--mobile-heading);
+  }
+  .storefront .story-copy h2,
+  .storefront .page-intro h1,
+  .storefront .legal-page h1 {
+    font-size: clamp(32px, 7.8vw, 40px);
+  }
+  .storefront .story-copy > p:not(.eyebrow),
+  .storefront .editorial-copy > p:not(.eyebrow),
+  .storefront .page-intro > p:last-child:not(.eyebrow),
+  .storefront .empty-state p,
+  .storefront .product-information > p.muted,
+  .storefront .product-accordions p,
+  .storefront .reels-description,
+  .storefront .collection-awaiting p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .storefront .button,
+  .storefront .button.small,
+  .storefront .hero .button {
+    font-size: 14px;
+    letter-spacing: 0.015em;
+    line-height: 1.5;
+    min-height: 48px;
+  }
+  .storefront .text-link,
+  .storefront .section-top .text-link {
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1.6;
+  }
+  .storefront .product-caption {
+    align-items: flex-start;
+    padding-top: 12px;
+  }
+  .storefront .product-caption h3 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+  .storefront .product-price {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 6px 0 3px;
+  }
+  .storefront .product-colors,
+  .storefront .small-text,
+  .storefront .stock-description,
+  .storefront .illustrative-product-note {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  .storefront .product-badge {
+    font-size: 10px;
+    letter-spacing: 0.035em;
+    line-height: 1.5;
+  }
+  .storefront .category-card h3 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+  .storefront .look-card h3,
+  .storefront .collection-grid h2 {
+    font-size: 22px;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+  .storefront .reels-track .video-caption p {
+    font-size: 25px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+  .storefront .video-caption a,
+  .storefront .reels-hint,
+  .storefront .catalog-meta,
+  .storefront .catalog-filters > label,
+  .storefront .breadcrumbs {
+    font-size: 12px;
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+  .storefront .product-information h1 {
+    font-size: clamp(29px, 7vw, 36px);
+    line-height: 1.28;
+    letter-spacing: -0.025em;
+  }
+  .storefront .detail-price {
+    font-size: 20px;
+  }
+  .storefront .product-information fieldset legend,
+  .storefront .choice-options button,
+  .storefront summary,
+  .storefront .total-row,
+  .storefront .selection-item strong {
+    font-size: 14px;
+  }
+  .storefront .drawer-head h2,
+  .storefront .selection-summary h2,
+  .storefront .compact .selection-summary h2 {
+    font-size: var(--mobile-heading);
+  }
+  .storefront .menu-drawer nav > a {
+    font-size: 26px;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  .storefront .menu-drawer nav > a > small,
+  .storefront .selection-item p,
+  .storefront .prepared-message pre {
+    font-size: 12px;
+  }
+  .storefront .selection-item h3 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .storefront .selection-summary > .muted,
+  .storefront .selection-summary .checkbox-label,
+  .storefront .consent-banner p:not(.eyebrow) {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .storefront .closing-note h2 {
+    font-size: clamp(40px, 10vw, 56px);
+    line-height: 1.2;
+    max-width: 13ch;
+    margin: 20px auto;
+  }
+  .storefront .site-footer p:not(.eyebrow),
+  .storefront .site-footer > div > a,
+  .storefront .site-footer > div > button {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .storefront .footer-bottom {
+    font-size: 11px;
+  }
+  .storefront .mobile-bottom a,
+  .storefront .mobile-bottom button {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 600px) {
+  .storefront .announcement {
+    font-size: 11px;
+    line-height: 1.55;
+    letter-spacing: 0.015em;
+  }
+  .storefront .hero {
+    min-height: clamp(540px, 78svh, 640px);
+  }
+  .storefront .hero-content {
+    padding: 48px 6% 100px;
+  }
+  .storefront .hero-content h1 {
+    font-size: clamp(36px, 9.5vw, 48px);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    max-width: 13ch;
+    margin: 22px 0;
+  }
+  .storefront .hero-content .eyebrow {
+    font-size: 10px;
+    line-height: 1.65;
+    letter-spacing: 0.1em;
+    max-width: 245px;
+  }
+  .storefront .hero-description {
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 29ch;
+  }
+  .storefront .hero-bottom > span {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  .storefront .brand-values {
+    font-size: 10px;
+    line-height: 1.55;
+    letter-spacing: 0;
+    text-align: center;
+    gap: 8px;
+    padding: 20px 5%;
+  }
+  .storefront .brand-values > span {
+    flex: 1;
+  }
+  .storefront .section {
+    padding: 44px 5%;
+  }
+  .storefront .section-top {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .storefront .section-top > div:first-child {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .storefront .section-top .text-link {
+    gap: 10px;
+  }
+  .storefront .section-heading {
+    margin-bottom: 24px;
+  }
+  .storefront .product-grid {
+    gap: 28px 14px;
+  }
+  .storefront .story-copy {
+    padding: 40px 6%;
+  }
+  .storefront .story-copy h2 {
+    margin: 18px 0;
+  }
+  .storefront .story-copy > p:not(.eyebrow) {
+    max-width: 38ch;
+  }
+  .storefront .reels-description {
+    max-width: 32ch;
+    margin-top: 12px;
+  }
+  .storefront .reels-hint {
+    gap: 12px;
+  }
+  .storefront .story-photograph > span {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .storefront .closing-note {
+    padding: 48px 6%;
+  }
+  .storefront .footer-brand > p {
+    max-width: 26ch;
+  }
+  .storefront .site-footer {
+    gap: 30px 22px;
+  }
+}

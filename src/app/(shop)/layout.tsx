@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getSettings } from "@/server/catalog";
 import { Header, Wordmark } from "@/components/shop/header";
 import { Tracking } from "@/components/tracking";
+import "./typography.css";
 export async function generateMetadata() {
   const settings = await getSettings();
   return { icons: settings.icon_url ? { icon: settings.icon_url } : undefined };
@@ -15,7 +16,7 @@ export default async function ShopLayout({
 }) {
   const settings = await getSettings();
   return (
-    <>
+    <div className="storefront">
       <Header settings={settings} />
       <main id="conteudo">
         <StoreMotion>{children}</StoreMotion>
@@ -77,6 +78,6 @@ export default async function ShopLayout({
         </div>
       </footer>
       <Tracking />
-    </>
+    </div>
   );
 }
