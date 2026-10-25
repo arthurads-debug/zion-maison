@@ -10,7 +10,7 @@ Migrations são uma etapa explícita, anterior ao deploy que as usa. Não são e
 
 ## Worker e retenção
 
-`vercel.json` agenda `/api/jobs` a cada cinco minutos. Configure `CRON_SECRET`; a rota exige `Authorization: Bearer SEGREDO`. Confirme se a frequência e duração estão disponíveis no plano contratado antes de ativar; veja [Vercel Cron Jobs](https://vercel.com/docs/cron-jobs).
+`vercel.json` agenda `/api/jobs` diariamente às 06h UTC, compatível com o plano Hobby atual. Configure `CRON_SECRET`; a rota exige `Authorization: Bearer SEGREDO`. Notificações, resumos e limpeza seguem essa frequência; para operação comercial com processamento próximo do tempo real, configure um agendador seguro mais frequente ou um plano compatível antes de ativar os provedores. O horário no Hobby pode variar dentro da hora; veja [Vercel Cron Jobs](https://vercel.com/docs/cron-jobs/usage-and-pricing).
 
 Alternativamente, um agendador seguro pode executar `pnpm worker` com as variáveis do ambiente. Não use duas agendas sem necessidade. O banco suporta disputa por jobs, mas não há benefício em execuções excessivas. Cada rodada reivindica até 20 trabalhos e pode durar até 300 segundos. Acompanhe filas quando o volume crescer.
 
