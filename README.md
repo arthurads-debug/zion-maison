@@ -2,6 +2,8 @@
 
 Boutique digital em português com catálogo, seleção de interesses e atendimento pelo WhatsApp. Painel administrativo com produtos, variações, estoque, vendas confirmadas manualmente, mídias, conteúdo editorial, equipe, relatórios e integrações.
 
+**Site público:** [zion-maison.vercel.app](https://zion-maison.vercel.app) · [Painel](https://zion-maison.vercel.app/admin) · [GitHub](https://github.com/arthurads-debug/zion-maison). Publicação automática pela branch `main` na Vercel, projeto `zion-maison` da equipe ADS. Variáveis privadas configuradas somente no ambiente de produção; previews não recebem as credenciais de produção.
+
 **Estado atual:** Supabase conectado ao ambiente local, nove migrations aplicadas e conta administrativa solicitada criada. A vitrine está montada com seis peças ilustrativas, quatro categorias, duas coleções, looks, editoriais e três vídeos verticais. Tudo é editável pelo painel; exemplos são identificados e bloqueados para compra. Login e importação de mídia verificada foram exercitados no serviço real. Credenciais ficam em `.env.local`, ignorado pelo Git. Catálogo comercial, políticas finais, entrega de e-mails e provedores externos ainda exigem homologação. Não existe banco simulado em produção.
 
 ## Iniciar no computador

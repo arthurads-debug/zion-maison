@@ -1,5 +1,16 @@
 # Publicação e continuidade
 
+## Publicação atual
+
+- Site: https://zion-maison.vercel.app
+- Administração: https://zion-maison.vercel.app/admin
+- Código público: https://github.com/arthurads-debug/zion-maison (branch de produção `main`).
+- Vercel: projeto `zion-maison`, equipe `ads-8d21`, Next.js, Node.js 24, funções em São Paulo (`gru1`). Pushes para `main` publicam automaticamente.
+- Supabase Auth: Site URL de produção e callback de recuperação com `next=/admin/redefinir` cadastrados no domínio HTTPS acima.
+- Variáveis do Supabase, criptografia e cron estão configuradas na produção. Previews precisam de um Supabase separado antes de serem utilizados para testar persistência.
+
+O empacotamento do WASM do MediaInfo usa seu caminho físico via `realpathSync` no `next.config.ts`. Evite incluir esse arquivo por `node_modules/mediainfo.js`, um diretório simbólico do pnpm que a Vercel rejeita durante o empacotamento.
+
 ## Ambientes
 
 Mantenha Supabase e variáveis separados para desenvolvimento, preview e produção. Use Node.js 22 ou superior. O comando de build é `pnpm build` (Webpack); `pnpm start` serve o resultado. O build não depende de um catálogo preenchido.
